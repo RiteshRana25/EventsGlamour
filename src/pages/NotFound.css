@@ -1,0 +1,48 @@
+.notfound-container {
+  background-image: url("../../public/not-found-background.png"); /* Your image filename */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  padding: 20px;
+}
+
+.notfound-overlay {
+  /* background-color: rgba(0, 0, 0, 0.6);  */
+  padding: 40px;
+  border-radius: 16px;
+  color: white;
+  max-width: 800px;
+  backdrop-filter: blur(4px);
+}
+
+.notfound-overlay h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.notfound-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.notfound-buttons button {
+  margin: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: 2px solid white; /* optional: adds a white outline */
+  border-radius: 8px;
+  color: white;
+  background-color: transparent; /* transparent background */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notfound-buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* soft hover effect */
+}
