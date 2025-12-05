@@ -1,12 +1,16 @@
 .portfolio-container {
-  max-width: 1000px;
-  margin: 70px auto;
-  padding: 0 20px;
+  padding: 60px 40px;
   text-align: center;
 }
-.portfolio-title{
-    text-align: center;
-  margin-bottom: 40px;
+
+.portfolio-container p {
+  color: #616161;
+}
+
+.portfolio-title {
+  text-align: center;
+  margin-top: 60px;
+  font-family: 'PT Serif', serif;
   font-size: 2.5rem;
   font-weight: bold;
   color: #333;
@@ -14,31 +18,51 @@
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 24px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fill, 300px); /* fixed width like service cards */
+  justify-content: center; /* center the grid */
+  margin-top: 60px;
 }
 
+/* Container stays same */
 .portfolio-card {
   cursor: pointer;
   background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow: hidden; /* important */
+  border-radius: 20px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
+/* Slight card lift effect */
 .portfolio-card:hover {
-  transform: scale(1.03);
+  transform: translateY(-4px);
 }
 
+/* Image zoom */
 .portfolio-card img {
-  width: 100%;
-  height: 200px;
+  width: 270px;
+  height: 270px; /* square like service cards */
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
+
+/* Zoom image on hover */
+.portfolio-card:hover img {
+  transform: scale(1.15); /* zoom-in */
+}
+
 
 .portfolio-card p {
-  padding: 10px;
-  font-weight: 600;
+    font-size: 22px;
+    font-weight: 100;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+  .portfolio-title {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
 }

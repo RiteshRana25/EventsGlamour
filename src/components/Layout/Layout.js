@@ -4,6 +4,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import WhatsappButton from '../WhatsAppButton/WhatsAppButton';
 
 const Layout = () => {
   return (
@@ -14,6 +15,7 @@ const Layout = () => {
         <Outlet /> {/* This renders the matched route's component */}
       </main>
       <Footer />
+      <WhatsappButton/>
     </>
   );
 };

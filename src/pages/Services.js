@@ -1,44 +1,63 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Services.css";
-
-const servicesData = [
-  "Wedding",
-  "Corporate",
-  "Anniversaries",
-  "Birthday Parties",
-  "Romantic Date",
-  "Baby Showers",
-  "Proposals",
-  "Furniture",
-  "AV LIGHT & SOUND",
-  "FLOWER ARRANGEMENTS",
-];
+import Reveal from "../components/Reveal/Reveal";
 
 const Services = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const [services, setServices] = useState([]);
+  const navigate = useNavigate();
 
-  const handleCardClick = (serviceName) => {
-    // Navigate to the service-view page, dynamically changing the route based on the service name
-    navigate(`/services/${serviceName}`);
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await axios.get('https://events-glamour-backend.vercel.app/api/images');
+
+        // Filter only items with type === "Service"
+        const serviceItems = res.data.filter(item => item.type === "Service");
+        setServices(serviceItems);
+
+        console.log("📥 Services from MongoDB:", serviceItems);
+      } catch (err) {
+        console.error("❌ Failed to fetch services:", err);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  const handleCardClick = (id) => {
+    // Smooth scroll to top before navigating
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    // Slight delay so smooth scroll finishes
+    setTimeout(() => {
+      navigate(`/services/${id}`);
+    }, 300);
   };
 
   return (
     <div className="services-container">
-      <h2>SERVICES</h2>
+      <h2>Comprehensive Event Services – Under One Roof</h2>
+
       <div className="services-grid">
-        {servicesData.map((title, index) => (
-          <div
-            key={index}
-            className="service-card"
-            onClick={() => handleCardClick(title)} // Pass the service name to the click handler
-          >
-            <img
-              src={`https://picsum.photos/seed/${Math.random()}/800/600`}
-              alt={title}
-            />
-            <h3>{title}</h3>
-          </div>
+        {services.map((service) => (
+          <Reveal key={service.id}>
+            <div
+              className="service-card"
+              onClick={() => handleCardClick(service.id)}
+            >
+              <img
+                src={service.cover}
+                alt={service.name}
+                loading="lazy"
+              />
+              <h3>{service.name}</h3>
+            </div>
+          </Reveal>
         ))}
       </div>
     </div>

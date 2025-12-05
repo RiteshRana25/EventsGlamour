@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import { FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaLinkedin,FaPhone, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -14,13 +14,20 @@ const Footer = () => {
         />
       </div>
 
-      <div className="footer-section contact-section">
+<div className="footer-section contact-section">
+  <div className="contact-item">
+    <h3>Phone</h3>
+    <FaPhone style={{ marginRight: '8px' }} />
+    <a className="phoneemail" href="tel:+971524460569">+971524460569</a>
+  </div>
 
-        <p>Phone</p>
-        <p>📞 0524460569</p>
-        <p>Email</p>
-        <p>✉️ info@eventsglamour.com</p>
-      </div>
+  <div className="contact-item">
+    <h3>Email</h3>
+    <FaEnvelope style={{ marginRight: '8px' }} />
+    <a className="phoneemail" href="mailto:info@eventsglamour.com">info@eventsglamour.com</a>
+  </div>
+</div>
+
 
       <div className="footer-section social-section">
         <a
@@ -32,7 +39,7 @@ const Footer = () => {
           <FaInstagram />
         </a>
         <a
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/share/17ridaj5R2/?mibextid=wwXIfr"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon facebook"
@@ -40,7 +47,7 @@ const Footer = () => {
           <FaFacebook />
         </a>
         <a
-          href="https://www.linkedin.com/company/events-glamour/"
+          href="https://www.linkedin.com/in/events-glamour-a49a42384?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon linkedin"
