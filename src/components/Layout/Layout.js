@@ -10,9 +10,8 @@ const Layout = () => {
   return (
     <>
     <Header/>
-      {/* You can add a Header here too */}
       <main style={{ minHeight: 'calc(100vh - 150px)' }}>
-        <Outlet /> {/* This renders the matched route's component */}
+        <Outlet /> 
       </main>
       <Footer />
       <WhatsappButton/>
