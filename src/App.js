@@ -23,7 +23,6 @@ function App() {
       </Helmet>
     <Router>
       <Routes>
-        {/* Wrap all main routes inside the Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="*" element={<NotFound />} />
