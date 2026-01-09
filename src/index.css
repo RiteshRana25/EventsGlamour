@@ -1,12 +1,11 @@
 html, body {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  overflow-x: hidden; /* Prevent horizontal overflow/scroll */
-  width: 100%; /* Ensure full width */
+  margin: 0; 
+  padding: 0;
+  overflow-x: hidden; 
+  width: 100%;
 }
 
-/* Ensure body takes full viewport height */
 body {
-  min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
-  overflow-x: hidden; /* Disable horizontal scroll */
+  min-height: 100vh;
+  overflow-x: hidden; 
 }
