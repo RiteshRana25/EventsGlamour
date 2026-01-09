@@ -1,5 +1,4 @@
-require("dotenv").config(); // MUST be at the top
-
+require("dotenv").config(); 
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -9,8 +8,8 @@ app.use(cors());
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error("❌ Connection error:", err));
+  .then(() => console.log(" MongoDB connected"))
+  .catch(err => console.error(" Connection error:", err));
 
 // Schema + Model
 const mediaSchema = new mongoose.Schema({
@@ -18,8 +17,7 @@ const mediaSchema = new mongoose.Schema({
   type: String,
   url: String,
 });
-const Media = mongoose.model("Media", mediaSchema, "cloudinaryvideo"); // collection name set
-
+const Media = mongoose.model("Media", mediaSchema, "cloudinaryvideo"); 
 // Routes
 app.get("/api/media", async (req, res) => {
   try {
@@ -41,4 +39,4 @@ app.post("/api/media", async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("🚀 Server running on http://localhost:5000"));
+app.listen(5000, () => console.log("Server running on http://localhost:5000"));
