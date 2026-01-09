@@ -28,13 +28,11 @@ const ServiceView = () => {
 
   if (!service) return <p>Loading service...</p>;
 
-  // Since ALL media are images
   const galleryImages = [
     service.cover,
     ...service.images.filter((img) => img.url !== service.cover).map(img => img.url),
   ];
 
-  // Overlay controls
   const openOverlay = (index) => setOverlayIndex(index);
   const closeOverlay = () => setOverlayIndex(null);
 
@@ -78,7 +76,6 @@ const ServiceView = () => {
         )}
       </div>
 
-      {/* Fullscreen Overlay */}
       {overlayIndex !== null && (
         <div className="overlay" onClick={closeOverlay}>
           <button className="close-btn" onClick={closeOverlay}>
