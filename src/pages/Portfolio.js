@@ -8,7 +8,7 @@ const Portfolio = () => {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
-  // Corrected function: receives item ID
+
   const PageNavigate = (id) => {
     window.scrollTo({
       top: 0,
@@ -17,7 +17,7 @@ const Portfolio = () => {
 
     setTimeout(() => {
       navigate(`/portfolio/${id}`);
-    }, 300); // slight delay for smooth scrolling
+    }, 300); 
   };
 
   useEffect(() => {
@@ -25,7 +25,6 @@ const Portfolio = () => {
       try {
         const res = await axios.get('https://events-glamour-backend.vercel.app/api/images');
 
-        // Filter only portfolio items
         const portfolioItems = res.data.filter((item) => item.type === 'Portfolio');
 
         setItems(portfolioItems);
@@ -49,7 +48,7 @@ const Portfolio = () => {
           <Reveal key={item.id} offset={10}>
             <div
               className="portfolio-card"
-              onClick={() => PageNavigate(item.id)}  // Pass ID here
+              onClick={() => PageNavigate(item.id)} 
             >
               <img src={item.cover} alt={item.name} />
               <p>{item.name}</p>
