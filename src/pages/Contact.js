@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
 
-  const accessKey = "8d091216-3e29-4c67-bc69-e34d3be9e905"; // Web3Forms access key
+  const accessKey = "8d091216-3e29-4c67-bc69-e34d3be9e905";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const Contact = () => {
 
       if (data.success) {
         toast.success("Message sent successfully!", { autoClose: 3000 });
-        e.target.reset(); // reset form fields
+        e.target.reset(); 
       } else {
         toast.error("Failed to send message. Please try again.", { autoClose: 3000 });
         console.error("Web3Forms API response:", data);
@@ -100,7 +100,6 @@ const Contact = () => {
         <button type="submit" className="submit-btn">Send Message</button>
       </form>
 
-      {/* Toast Container */}
       <ToastContainer
         position="top-right"
         newestOnTop={true}
