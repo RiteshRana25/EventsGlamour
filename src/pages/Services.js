@@ -13,7 +13,6 @@ const Services = () => {
       try {
         const res = await axios.get('https://events-glamour-backend.vercel.app/api/images');
 
-        // Filter only items with type === "Service"
         const serviceItems = res.data.filter(item => item.type === "Service");
         setServices(serviceItems);
 
@@ -27,13 +26,11 @@ const Services = () => {
   }, []);
 
   const handleCardClick = (id) => {
-    // Smooth scroll to top before navigating
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
 
-    // Slight delay so smooth scroll finishes
     setTimeout(() => {
       navigate(`/services/${id}`);
     }, 300);
