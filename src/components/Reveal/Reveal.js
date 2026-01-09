@@ -45,7 +45,6 @@ export default function Reveal({ children, offset = 15 }) {
         try {
           obs.unobserve(el);
         } catch (e) {
-          // do nothing, element already removed
         }
       }
       callbacks.delete(el);
