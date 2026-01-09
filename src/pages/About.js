@@ -9,7 +9,6 @@ const About = () => {
   const [about1, setAbout1] = useState([]);
   const [about2, setAbout2] = useState([]);
 
-  // 1️⃣ Fetch DB data
   useEffect(() => {
     const fetchAboutImages = async () => {
       try {
@@ -52,7 +51,6 @@ const About = () => {
     fetchAboutImages();
   }, []);
 
-  // 2️⃣ Header slider (your static part)
   const headerImages = [
     {
       src: "https://res.cloudinary.com/dfdhunrxn/image/upload/v1764154523/IMG_0848_v6egib.jpg",
@@ -106,7 +104,6 @@ const About = () => {
 
   return (
     <div className="about-container">
-      {/* TOP SLIDER */}
       <div className="about-image slider-wrapper">
         {headerImages.map((img, index) => (
           <img
@@ -121,7 +118,6 @@ const About = () => {
         ))}
       </div>
 
-      {/* WHO WE ARE */}
       <div className="about-text">
         <Reveal>
           <div className="about-heading">
@@ -136,7 +132,6 @@ const About = () => {
         </Reveal>
       </div>
 
-      {/* ⭐ FIRST CAROUSEL = About1 */}
       <Reveal>
         <div className="carousel-wrapper">
           <Carousel
@@ -160,7 +155,6 @@ const About = () => {
         </div>
       </Reveal>
 
-      {/* ⭐ MIDDLE CONTENT */}
       <Reveal>
         <div
           style={{
@@ -204,7 +198,6 @@ const About = () => {
         </div>
       </Reveal>
 
-      {/* ⭐ SECOND CAROUSEL = About2 */}
       <Reveal>
         <div className="carousel-wrapper">
           <Carousel
