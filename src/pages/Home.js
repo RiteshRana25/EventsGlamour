@@ -10,7 +10,6 @@ const responsive = {
   mobile: { breakpoint: { max: 464, min: 0 }, items: 2, slidesToSlide: 1 },
 };
 
-// ✅ Top images with objectPosition
 const topImages = [
   {
     src: "https://res.cloudinary.com/dfdhunrxn/image/upload/v1764402017/IMG_1049_sehxxs.jpg",
@@ -59,7 +58,6 @@ const Home = () => {
     fetchHomeImages();
   }, []);
 
-  // ✅ Cycle top images every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTopIndex((prevIndex) => (prevIndex + 1) % topImages.length);
@@ -68,7 +66,6 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // ✅ Handle screen resize for objectPosition
   useEffect(() => {
     const handleResize = () => setIsSmallScreen(window.innerWidth < 1440);
     window.addEventListener("resize", handleResize);
@@ -85,7 +82,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* Fullscreen top slideshow with positions */}
+
       <div className="full-screen-image">
         {topImages.map((img, index) => (
           <img
@@ -102,7 +99,6 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Intro section */}
       <Reveal>
         <div className="section">
           <h2>Celebrations Redefined with Events Glamour</h2>
@@ -115,7 +111,6 @@ const Home = () => {
         </div>
       </Reveal>
 
-      {/* Sections with carousels */}
       {sections.map((sec, index) => (
         <Reveal key={index}>
           <div className="section">
