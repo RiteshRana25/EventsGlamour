@@ -99,6 +99,73 @@
   color: #666;
 }
 
+.reviews-section {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.reviews-carousel-wrap {
+  max-width: 800px;
+  margin: 0 auto 70px;
+  padding: 0 20px 30px;
+  overflow: hidden;
+}
+
+.reviews-carousel {
+  overflow: hidden;
+}
+
+.reviews-carousel .react-multi-carousel-list {
+  overflow: hidden !important;
+  position: relative;
+}
+
+.reviews-carousel .react-multi-carousel-track {
+  display: flex;
+  align-items: stretch;
+}
+
+.review-slide {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.review-card {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1.5rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.review-text {
+  font-family: "PT Serif", serif;
+  font-size: 1.35rem;
+  font-weight: 100;
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 1.5rem;
+}
+
+.review-name {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #666;
+  margin: 0;
+}
+
+.reviews-carousel .react-multi-carousel-dot button {
+  border-color: #bbb;
+  background: transparent;
+}
+
+.reviews-carousel .react-multi-carousel-dot--active button {
+  background: #7b5cf7;
+  border-color: #7b5cf7;
+}
+
 @media (max-width: 768px){
   .full-screen-image{
     height: 60vh;
@@ -135,5 +202,11 @@
   .section h2,
   .section h3{
       font-size: 1.5rem;
+  }
+  .review-text {
+    font-size: 1.1rem;
+  }
+  .reviews-carousel-wrap {
+    margin-bottom: 50px;
   }
 }

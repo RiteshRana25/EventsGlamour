@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Helmet } from 'react-helmet';
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout/Layout";
@@ -13,14 +12,6 @@ import PortfolioDetail from "./pages/PortfolioDetail";
 
 function App() {
   return (
-    <>
-    <Helmet>
-        <title>Events Glamour</title>
-        <meta
-          name="description"
-          content="Events Glamour is a premier event management company in Dubai offering weddings, corporate events, luxury parties, catering, furniture rentals, entertainment, and production services. We design unforgettable experiences with elegance, creativity, and precision."
-        />
-      </Helmet>
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -35,7 +26,6 @@ function App() {
         </Route>
       </Routes>
     </Router>
-    </>
   );
 }
 

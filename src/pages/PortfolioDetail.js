@@ -4,7 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./PortfolioDetail.css";
 import NotFound from "./NotFound";
 import Reveal from "../components/Reveal/Reveal";
-
+import SEO from "../components/SEO/SEO";
+import { cldThumb, cldLarge } from "../utils/cloudinary";
 
 const PortfolioDetail = () => {
   const { id } = useParams();
@@ -60,6 +61,12 @@ const allImages = [
 
   return (
     <div className="portfolio-detail-container">
+      <SEO
+        title={`${item.name} | Events Glamour Portfolio`}
+        description={`View ${item.name} — a luxury event showcase by Events Glamour, Dubai's event management specialists.`}
+        path={`/portfolio/${id}`}
+        image={item.cover || undefined}
+      />
       <button
         className="back-navigate"
         onClick={() => navigate("/portfolio")}
@@ -88,10 +95,11 @@ const allImages = [
                 />
               ) : (
                 <img
-                  src={media.url}
-                  alt={`media-${index}`}
+                  src={cldThumb(media.url)}
+                  alt={`${item.name} gallery image ${index + 1}`}
                   className="portfolio-image"
                   loading="lazy"
+                  decoding="async"
                 />
               )}
             </div>
@@ -119,9 +127,8 @@ const allImages = [
           ) : (
             <img
               className="overlay-image"
-              src={allImages[overlayIndex].url}
-              alt="Large View"
-              loading="lazy"
+              src={cldLarge(allImages[overlayIndex].url)}
+              alt={`${item.name} — enlarged gallery view`}
             />
           )}
           <button className="arrow right" onClick={nextImage}>

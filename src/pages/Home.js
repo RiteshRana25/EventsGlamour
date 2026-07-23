@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import Reveal from "../components/Reveal/Reveal";
+import SEO from "../components/SEO/SEO";
+import reviews from "../data/reviews";
+import { cldHero, cldThumb } from "../utils/cloudinary";
 import "./Home.css";
 
 const responsive = {
   desktop: { breakpoint: { max: 3000, min: 1024 }, items: 5, slidesToSlide: 1 },
   tablet: { breakpoint: { max: 1024, min: 464 }, items: 3, slidesToSlide: 1 },
   mobile: { breakpoint: { max: 464, min: 0 }, items: 2, slidesToSlide: 1 },
+};
+
+const reviewResponsive = {
+  desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1, slidesToSlide: 1 },
+  tablet: { breakpoint: { max: 1024, min: 464 }, items: 1, slidesToSlide: 1 },
+  mobile: { breakpoint: { max: 464, min: 0 }, items: 1, slidesToSlide: 1 },
 };
 
 const topImages = [
@@ -82,21 +92,37 @@ const Home = () => {
 
   return (
     <div className="home">
+      <SEO
+        title="Events Glamour | Luxury Event Management Company in Dubai"
+        description="Luxury event management in Dubai — weddings, corporate events, parties, catering & production by Events Glamour."
+        path="/"
+      />
 
       <div className="full-screen-image">
-        {topImages.map((img, index) => (
-          <img
-            key={index}
-            src={img.src}
-            alt={`Home Top ${index + 1}`}
-            className={`image-full ${
-              index === currentTopIndex ? "active" : ""
-            }`}
-            style={{
-              objectPosition: isSmallScreen ? img.position : undefined,
-            }}
-          />
-        ))}
+        {topImages.map((img, index) => {
+          const isActive = index === currentTopIndex;
+          const isNearby =
+            index === currentTopIndex ||
+            index === (currentTopIndex + 1) % topImages.length ||
+            index ===
+              (currentTopIndex - 1 + topImages.length) % topImages.length;
+
+          if (!isNearby) return null;
+
+          return (
+            <img
+              key={index}
+              src={cldHero(img.src)}
+              alt={`Events Glamour luxury event showcase ${index + 1} in Dubai`}
+              className={`image-full ${isActive ? "active" : ""}`}
+              style={{
+                objectPosition: isSmallScreen ? img.position : undefined,
+              }}
+              fetchPriority={isActive && currentTopIndex === 0 ? "high" : "low"}
+              decoding={isActive ? "sync" : "async"}
+            />
+          );
+        })}
       </div>
 
       <Reveal>
@@ -132,15 +158,48 @@ const Home = () => {
             {(homeImages[sec.name] || []).map((url, idx) => (
               <img
                 key={idx}
-                src={url}
+                src={cldThumb(url)}
                 alt={`${sec.title} ${idx + 1}`}
                 className="carousel-item"
                 loading="lazy"
+                decoding="async"
               />
             ))}
           </Carousel>
         </Reveal>
       ))}
+
+      <Reveal>
+        <div className="section reviews-section">
+          <h2>What Our Clients Say</h2>
+          <p>Real experiences from celebrations planned with Events Glamour.</p>
+        </div>
+      </Reveal>
+
+      <div className="reviews-carousel-wrap">
+        <Carousel
+          responsive={reviewResponsive}
+          infinite
+          autoPlay
+          autoPlaySpeed={5000}
+          arrows={false}
+          showDots
+          swipeable
+          draggable
+          keyBoardControl
+          partialVisible={false}
+          centerMode={false}
+          containerClass="reviews-carousel"
+          itemClass="review-slide"
+        >
+          {reviews.map((item) => (
+            <div key={item.id} className="review-card">
+              <p className="review-text">“{item.review}”</p>
+              <p className="review-name">— {item.name}</p>
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </div>
   );
 };
