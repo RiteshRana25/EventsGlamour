@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ServicesView.css";
 import Reveal from "../components/Reveal/Reveal";
+import SEO from "../components/SEO/SEO";
+import { cldThumb, cldLarge } from "../utils/cloudinary";
 
 const ServiceView = () => {
   const { serviceName } = useParams();
@@ -52,6 +54,12 @@ const ServiceView = () => {
 
   return (
     <div className="service-view-container">
+      <SEO
+        title={`${service.name} | Events Glamour Dubai`}
+        description={`Discover ${service.name} by Events Glamour — luxury event management and styling services in Dubai.`}
+        path={`/services/${serviceName}`}
+        image={service.cover || undefined}
+      />
       <button className="back-navigate" onClick={() => navigate("/services")}>
         ← Back
       </button>
@@ -65,10 +73,11 @@ const ServiceView = () => {
           galleryImages.map((imgUrl, idx) => (
             <Reveal key={idx}>
               <img
-                src={imgUrl}
+                src={cldThumb(imgUrl)}
                 alt={`${service.name} ${idx + 1}`}
                 className="service-grid-image"
                 loading="lazy"
+                decoding="async"
                 onClick={() => openOverlay(idx)}
               />
             </Reveal>
@@ -87,8 +96,8 @@ const ServiceView = () => {
           </button>
 
           <img
-            src={galleryImages[overlayIndex]}
-            alt="Large View"
+            src={cldLarge(galleryImages[overlayIndex])}
+            alt={`${service.name} — enlarged gallery view`}
             className="overlay-image"
           />
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO/SEO";
 import "./NotFound.css";
 
 const NotFound = () => {
@@ -7,6 +8,12 @@ const NotFound = () => {
 
   return (
     <div className="notfound-container">
+      <SEO
+        title="Page Not Found | Events Glamour"
+        description="The page you requested could not be found. Return to Events Glamour to explore our luxury event portfolio in Dubai."
+        path="/404"
+        noindex
+      />
       <div className="notfound-overlay">
         <h1>The event you’re searching for isn’t in our portfolio.</h1>
         <p>

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Portfolio.css';
 import Reveal from '../components/Reveal/Reveal';
+import SEO from '../components/SEO/SEO';
+import { cldThumb } from '../utils/cloudinary';
 
 const Portfolio = () => {
   const [items, setItems] = useState([]);
@@ -38,6 +40,11 @@ const Portfolio = () => {
 
   return (
     <div className="portfolio-container">
+      <SEO
+        title="Event Portfolio | Events Glamour Dubai"
+        description="Browse Events Glamour's portfolio of weddings, corporate events, and luxury celebrations designed and delivered across Dubai."
+        path="/portfolio"
+      />
       <h2 className='portfolio-title'>Our Work Speaks for Itself</h2>
       <p>
         From glamorous weddings to corporate events and private parties, our gallery showcases creativity, precision, and unforgettable designs.
@@ -50,7 +57,12 @@ const Portfolio = () => {
               className="portfolio-card"
               onClick={() => PageNavigate(item.id)} 
             >
-              <img src={item.cover} alt={item.name} />
+              <img
+                src={cldThumb(item.cover)}
+                alt={item.name}
+                loading="lazy"
+                decoding="async"
+              />
               <p>{item.name}</p>
             </div>
           </Reveal>

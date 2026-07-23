@@ -52,7 +52,7 @@ const toggleDrawer = (open) => () => {
   return (
     <div className="navbar">
       <Link className="logo" to="/">
-        <img src="/logo1.png" alt="Logo" />
+        <img src="/logo1.png" alt="Events Glamour logo" />
       </Link>
 
       <div className="nav-links">
@@ -78,7 +78,7 @@ const toggleDrawer = (open) => () => {
           <MenuIcon fontSize="small" />
         </IconButton>
         <div className="headlogo">
-          <img src="/logo1.png" alt="Logo" />
+          <img src="/logo1.png" alt="Events Glamour logo" />
         </div>
       </div>
 

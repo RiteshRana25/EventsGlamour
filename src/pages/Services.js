@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Services.css";
 import Reveal from "../components/Reveal/Reveal";
+import SEO from "../components/SEO/SEO";
+import { cldThumb } from "../utils/cloudinary";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -38,6 +40,11 @@ const Services = () => {
 
   return (
     <div className="services-container">
+      <SEO
+        title="Event Services in Dubai | Events Glamour"
+        description="Explore Events Glamour services in Dubai: weddings, décor, catering, entertainment, production, furniture rentals, and full event planning."
+        path="/services"
+      />
       <h2>Comprehensive Event Services – Under One Roof</h2>
 
       <div className="services-grid">
@@ -48,9 +55,10 @@ const Services = () => {
               onClick={() => handleCardClick(service.id)}
             >
               <img
-                src={service.cover}
+                src={cldThumb(service.cover)}
                 alt={service.name}
                 loading="lazy"
+                decoding="async"
               />
               <h3>{service.name}</h3>
             </div>

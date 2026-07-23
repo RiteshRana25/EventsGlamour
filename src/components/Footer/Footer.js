@@ -9,7 +9,7 @@ const Footer = () => {
         <img
           style={{ color: "white" }}
           src="/logo-modified.jpg"
-          alt="Logo"
+          alt="Events Glamour logo"
           className="footer-logo"
         />
       </div>

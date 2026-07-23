@@ -3,7 +3,9 @@ import "./About.css";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import Reveal from "../components/Reveal/Reveal";
+import SEO from "../components/SEO/SEO";
 import axios from "axios";
+import { cldHero, cldThumb, cldLarge } from "../utils/cloudinary";
 
 const About = () => {
   const [about1, setAbout1] = useState([]);
@@ -104,18 +106,35 @@ const About = () => {
 
   return (
     <div className="about-container">
+      <SEO
+        title="About Us | Events Glamour Dubai"
+        description="Meet Events Glamour — Dubai event planners crafting weddings, corporate functions, and luxury celebrations with creativity and precision."
+        path="/about"
+      />
       <div className="about-image slider-wrapper">
-        {headerImages.map((img, index) => (
-          <img
-            key={index}
-            src={img.src}
-            alt={`Slide ${index}`}
-            className={index === current ? "fade-image active" : "fade-image"}
-            style={{
-              objectPosition: isSmallScreen ? img.position : undefined,
-            }}
-          />
-        ))}
+        {headerImages.map((img, index) => {
+          const isActive = index === current;
+          const isNearby =
+            index === current ||
+            index === (current + 1) % headerImages.length ||
+            index === (current - 1 + headerImages.length) % headerImages.length;
+
+          if (!isNearby) return null;
+
+          return (
+            <img
+              key={index}
+              src={cldHero(img.src)}
+              alt={`Events Glamour about us event photography ${index + 1}`}
+              className={isActive ? "fade-image active" : "fade-image"}
+              style={{
+                objectPosition: isSmallScreen ? img.position : undefined,
+              }}
+              fetchPriority={isActive && current === 0 ? "high" : "low"}
+              decoding={isActive ? "sync" : "async"}
+            />
+          );
+        })}
       </div>
 
       <div className="about-text">
@@ -146,9 +165,10 @@ const About = () => {
             {about1.map((url, index) => (
               <img
                 key={index}
-                src={url}
-                alt={`About1 ${index}`}
+                src={cldThumb(url)}
+                alt={`Events Glamour team and event design gallery ${index + 1}`}
                 loading="lazy"
+                decoding="async"
               />
             ))}
           </Carousel>
@@ -176,8 +196,12 @@ const About = () => {
 
             <div className="our-promise-image">
               <img
-                src="https://res.cloudinary.com/dfdhunrxn/image/upload/v1764179913/IMG_0258_c0adj7.jpg"
-                alt="Our Promise"
+                src={cldLarge(
+                  "https://res.cloudinary.com/dfdhunrxn/image/upload/v1764179913/IMG_0258_c0adj7.jpg"
+                )}
+                alt="Events Glamour promise — premium event styling and coordination in Dubai"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -212,9 +236,10 @@ const About = () => {
             {about2.map((url, index) => (
               <img
                 key={index}
-                src={url}
-                alt={`About2 ${index}`}
+                src={cldThumb(url)}
+                alt={`Events Glamour luxury celebration moments ${index + 1}`}
                 loading="lazy"
+                decoding="async"
               />
             ))}
           </Carousel>
