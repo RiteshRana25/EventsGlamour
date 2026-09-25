@@ -1,6 +1,6 @@
 /* === ServiceView Container === */
 .service-view-container {
-  margin-top: 50px;
+  margin-top: 100px;
   font-family: 'Alegreya Sans', sans-serif;
   display: flex;
   flex-direction: column;
@@ -54,6 +54,9 @@
 
 /* === Responsive === */
 @media (max-width: 768px) {
+  .service-view-container {
+    margin-top: 16px;
+  }
   .service-image-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }

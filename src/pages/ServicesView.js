@@ -5,6 +5,7 @@ import "./ServicesView.css";
 import Reveal from "../components/Reveal/Reveal";
 import SEO from "../components/SEO/SEO";
 import { cldThumb, cldLarge } from "../utils/cloudinary";
+import API_URL from "../config";
 
 const ServiceView = () => {
   const { serviceName } = useParams();
@@ -16,7 +17,7 @@ const ServiceView = () => {
     const fetchService = async () => {
       try {
         const res = await axios.get(
-          `https://events-glamour-backend.vercel.app/api/images/${serviceName}`
+          `${API_URL}/api/images/${serviceName}`
         );
 
         setService(res.data);

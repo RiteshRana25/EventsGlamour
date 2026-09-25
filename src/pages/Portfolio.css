@@ -59,6 +59,9 @@
 }
 
 @media (max-width: 768px) {
+  .portfolio-container {
+    padding: 28px 16px 40px;
+  }
   .portfolio-title {
     margin-bottom: 40px;
     font-size: 1.5rem;

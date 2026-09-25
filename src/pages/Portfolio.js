@@ -5,6 +5,7 @@ import './Portfolio.css';
 import Reveal from '../components/Reveal/Reveal';
 import SEO from '../components/SEO/SEO';
 import { cldThumb } from '../utils/cloudinary';
+import API_URL from '../config';
 
 const Portfolio = () => {
   const [items, setItems] = useState([]);
@@ -25,7 +26,7 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get('https://events-glamour-backend.vercel.app/api/images');
+        const res = await axios.get(`${API_URL}/api/images`);
 
         const portfolioItems = res.data.filter((item) => item.type === 'Portfolio');
 

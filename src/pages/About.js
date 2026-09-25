@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./About.css";
-import "react-multi-carousel/lib/styles.css";
-import Carousel from "react-multi-carousel";
 import Reveal from "../components/Reveal/Reveal";
 import SEO from "../components/SEO/SEO";
+import Marquee from "../components/Marquee/Marquee";
 import axios from "axios";
-import { cldHero, cldThumb, cldLarge } from "../utils/cloudinary";
+import { cldHero, cldThumb } from "../utils/cloudinary";
+import API_URL from "../config";
 
 const About = () => {
   const [about1, setAbout1] = useState([]);
@@ -15,7 +15,7 @@ const About = () => {
     const fetchAboutImages = async () => {
       try {
         const res = await axios.get(
-          "https://events-glamour-backend.vercel.app/api/images"
+          `${API_URL}/api/images`
         );
 
         const data = res.data.filter(
@@ -94,16 +94,6 @@ const About = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 5,
-      slidesToSlide: 1,
-    },
-    tablet: { breakpoint: { max: 1024, min: 464 }, items: 3, slidesToSlide: 1 },
-    mobile: { breakpoint: { max: 464, min: 0 }, items: 2, slidesToSlide: 1 },
-  };
-
   return (
     <div className="about-container">
       <SEO
@@ -151,29 +141,10 @@ const About = () => {
         </Reveal>
       </div>
 
-      <Reveal>
-        <div className="carousel-wrapper">
-          <Carousel
-            responsive={responsive}
-            infinite
-            autoPlay
-            autoPlaySpeed={0}
-            transitionDuration={5000}
-            arrows={false}
-            customTransition="transform 5s linear"
-          >
-            {about1.map((url, index) => (
-              <img
-                key={index}
-                src={cldThumb(url)}
-                alt={`Events Glamour team and event design gallery ${index + 1}`}
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
-          </Carousel>
-        </div>
-      </Reveal>
+      <Marquee
+        images={about1.map((url) => cldThumb(url))}
+        label="Events Glamour gallery"
+      />
 
       <Reveal>
         <div
@@ -185,21 +156,25 @@ const About = () => {
         >
           <div className="our-promise-section">
             <div className="our-promise-text">
-              <h2>Our Promise</h2>
-              <ul>
-                <li>Tailor-made event concepts</li>
-                <li>Professional coordination & execution</li>
-                <li>Premium vendor network</li>
-                <li>Attention to every detail</li>
-              </ul>
+              <h2>About Us</h2>
+              <p>
+                Founded in Dubai in 2022 by Gaurav Arora, Events Glamour is a
+                luxury event design and management company creating
+                sophisticated, unforgettable experiences.
+              </p>
+              <p>
+                From elegant celebrations to high-profile corporate events, we
+                blend vision, creativity, refined design, and flawless
+                execution to transform every occasion into an extraordinary
+                experience.
+              </p>
+              <p>Events Glamour — Where Every Detail Defines Luxury.</p>
             </div>
 
             <div className="our-promise-image">
               <img
-                src={cldLarge(
-                  "https://res.cloudinary.com/dfdhunrxn/image/upload/v1764179913/IMG_0258_c0adj7.jpg"
-                )}
-                alt="Events Glamour promise — premium event styling and coordination in Dubai"
+                src="/owner-image.jpeg"
+                alt="Gaurav Arora, founder of Events Glamour"
                 loading="lazy"
                 decoding="async"
               />
@@ -222,29 +197,10 @@ const About = () => {
         </div>
       </Reveal>
 
-      <Reveal>
-        <div className="carousel-wrapper">
-          <Carousel
-            responsive={responsive}
-            infinite
-            autoPlay
-            autoPlaySpeed={0}
-            transitionDuration={5000}
-            arrows={false}
-            customTransition="transform 5s linear"
-          >
-            {about2.map((url, index) => (
-              <img
-                key={index}
-                src={cldThumb(url)}
-                alt={`Events Glamour luxury celebration moments ${index + 1}`}
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
-          </Carousel>
-        </div>
-      </Reveal>
+      <Marquee
+        images={about2.map((url) => cldThumb(url))}
+        label="Events Glamour celebrations"
+      />
     </div>
   );
 };

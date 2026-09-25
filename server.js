@@ -4,7 +4,25 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+
+const allowedOrigins = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim().replace(/\/$/, ""))
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      const normalized = origin.replace(/\/$/, "");
+      callback(null, allowedOrigins.includes(normalized));
+    },
+  })
+);
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)

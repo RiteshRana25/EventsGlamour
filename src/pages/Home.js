@@ -3,16 +3,11 @@ import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Reveal from "../components/Reveal/Reveal";
+import Marquee from "../components/Marquee/Marquee";
 import SEO from "../components/SEO/SEO";
-import reviews from "../data/reviews";
 import { cldHero, cldThumb } from "../utils/cloudinary";
+import API_URL from "../config";
 import "./Home.css";
-
-const responsive = {
-  desktop: { breakpoint: { max: 3000, min: 1024 }, items: 5, slidesToSlide: 1 },
-  tablet: { breakpoint: { max: 1024, min: 464 }, items: 3, slidesToSlide: 1 },
-  mobile: { breakpoint: { max: 464, min: 0 }, items: 2, slidesToSlide: 1 },
-};
 
 const reviewResponsive = {
   desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1, slidesToSlide: 1 },
@@ -37,15 +32,14 @@ const topImages = [
 
 const Home = () => {
   const [homeImages, setHomeImages] = useState({});
+  const [reviews, setReviews] = useState([]);
   const [currentTopIndex, setCurrentTopIndex] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1440);
 
   useEffect(() => {
     const fetchHomeImages = async () => {
       try {
-        const res = await axios.get(
-          "https://events-glamour-backend.vercel.app/api/images"
-        );
+        const res = await axios.get(`${API_URL}/api/images`);
 
         const grouped = res.data.reduce((acc, item) => {
           if (item.name.toLowerCase().startsWith("home")) {
@@ -66,6 +60,21 @@ const Home = () => {
     };
 
     fetchHomeImages();
+  }, []);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/reviews`, {
+          params: { request: "approved" },
+        });
+        setReviews(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Failed to fetch reviews:", err);
+      }
+    };
+
+    fetchReviews();
   }, []);
 
   useEffect(() => {
@@ -143,63 +152,48 @@ const Home = () => {
             <h2>{sec.title}</h2>
           </div>
 
-          <Carousel
-            responsive={responsive}
-            infinite
-            autoPlay
-            autoPlaySpeed={0}
-            transitionDuration={5000}
-            arrows={false}
-            showDots={false}
-            customTransition="transform 5s linear"
-            containerClass="carousel-container"
-            itemClass="carousel-item"
-          >
-            {(homeImages[sec.name] || []).map((url, idx) => (
-              <img
-                key={idx}
-                src={cldThumb(url)}
-                alt={`${sec.title} ${idx + 1}`}
-                className="carousel-item"
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
-          </Carousel>
+          <Marquee
+            images={(homeImages[sec.name] || []).map((url) => cldThumb(url))}
+            label={sec.title}
+          />
         </Reveal>
       ))}
 
-      <Reveal>
-        <div className="section reviews-section">
-          <h2>What Our Clients Say</h2>
-          <p>Real experiences from celebrations planned with Events Glamour.</p>
-        </div>
-      </Reveal>
-
-      <div className="reviews-carousel-wrap">
-        <Carousel
-          responsive={reviewResponsive}
-          infinite
-          autoPlay
-          autoPlaySpeed={5000}
-          arrows={false}
-          showDots
-          swipeable
-          draggable
-          keyBoardControl
-          partialVisible={false}
-          centerMode={false}
-          containerClass="reviews-carousel"
-          itemClass="review-slide"
-        >
-          {reviews.map((item) => (
-            <div key={item.id} className="review-card">
-              <p className="review-text">“{item.review}”</p>
-              <p className="review-name">— {item.name}</p>
+      {reviews.length > 0 && (
+        <>
+          <Reveal>
+            <div className="section reviews-section">
+              <h2>What Our Clients Say</h2>
+              <p>Real experiences from celebrations planned with Events Glamour.</p>
             </div>
-          ))}
-        </Carousel>
-      </div>
+          </Reveal>
+
+          <div className="reviews-carousel-wrap">
+            <Carousel
+              responsive={reviewResponsive}
+              infinite={reviews.length > 1}
+              autoPlay={reviews.length > 1}
+              autoPlaySpeed={5000}
+              arrows={false}
+              showDots={reviews.length > 1}
+              swipeable
+              draggable
+              keyBoardControl
+              partialVisible={false}
+              centerMode={false}
+              containerClass="reviews-carousel"
+              itemClass="review-slide"
+            >
+              {reviews.map((item) => (
+                <div key={item._id} className="review-card">
+                  <p className="review-text">“{item.review}”</p>
+                  <p className="review-name">— {item.name}</p>
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        </>
+      )}
     </div>
   );
 };

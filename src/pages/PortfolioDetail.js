@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import Reveal from "../components/Reveal/Reveal";
 import SEO from "../components/SEO/SEO";
 import { cldThumb, cldLarge } from "../utils/cloudinary";
+import API_URL from "../config";
 
 const PortfolioDetail = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const PortfolioDetail = () => {
     const fetchItem = async () => {
       try {
         const res = await axios.get(
-          `https://events-glamour-backend.vercel.app/api/images/${id}`
+          `${API_URL}/api/images/${id}`
         );
         if (!res.data) {
           setNotFound(true);

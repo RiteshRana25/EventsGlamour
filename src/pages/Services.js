@@ -5,6 +5,7 @@ import "./Services.css";
 import Reveal from "../components/Reveal/Reveal";
 import SEO from "../components/SEO/SEO";
 import { cldThumb } from "../utils/cloudinary";
+import API_URL from "../config";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -13,7 +14,7 @@ const Services = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get('https://events-glamour-backend.vercel.app/api/images');
+        const res = await axios.get(`${API_URL}/api/images`);
 
         const serviceItems = res.data.filter(item => item.type === "Service");
         setServices(serviceItems);

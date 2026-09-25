@@ -1,5 +1,5 @@
 .portfolio-detail-container {
-  padding: 40px 30px;
+  padding: 110px 30px 40px;
   margin: auto;
   font-family: sans-serif;
 }
@@ -51,8 +51,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.9);
   display: flex;
   justify-content: center;
@@ -118,6 +118,9 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .portfolio-detail-container {
+    padding: 24px 16px 40px;
+  }
   .portfolio-gallery {
     grid-template-columns: repeat(3, 1fr);
   }

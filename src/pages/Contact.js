@@ -1,10 +1,12 @@
 import { useState } from "react";
+import axios from "axios";
 import { FaPhone, FaEnvelope, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Reveal from "../components/Reveal/Reveal";
 import SEO from "../components/SEO/SEO";
 import { cldHero } from "../utils/cloudinary";
+import API_URL from "../config";
 import "./Contact.css";
 
 const Contact = () => {
@@ -52,13 +54,27 @@ const Contact = () => {
       setContactSending
     );
 
-  const handleReviewSubmit = (e) =>
-    submitToWeb3Forms(
-      e,
-      "New Review Submission",
-      "Thank you for your review!",
-      setReviewSending
-    );
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    setReviewSending(true);
+
+    const form = e.target;
+    const name = form.name.value.trim();
+    const review = form.review.value.trim();
+
+    try {
+      await axios.post(`${API_URL}/api/reviews`, { name, review });
+      toast.success("Thank you for your review! It will appear after approval.", {
+        autoClose: 3000,
+      });
+      form.reset();
+    } catch (error) {
+      toast.error("Failed to submit review. Please try again.", { autoClose: 3000 });
+      console.error(error);
+    } finally {
+      setReviewSending(false);
+    }
+  };
 
   return (
     <div className="contact-page">
